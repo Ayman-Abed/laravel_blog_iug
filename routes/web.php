@@ -17,9 +17,22 @@ Route::get('/', 'UIController@index')->name('UI.index');
 Route::get('/category/{id}-{slug}', 'UIController@showCategory')->name('UI.showCategory');
 Route::get('/post/{id}-{slug}', 'UIController@showPost')->name('UI.showPost');
 
+
+// Contact US
+
+Route::get('/showContact', 'UIController@showContact')->name('UI.showContact');
+Route::post('/contact', 'UIController@contact')->name('UI.contact');
+
+// For Search
+Route::get('/search', 'UIController@search')->name('UI.search');
+
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
 
 
 Route::group(['prefix' => 'manager', 'middleware' => 'auth'], function () {
@@ -68,6 +81,9 @@ Route::group(['prefix' => 'manager', 'middleware' => 'auth'], function () {
     Route::post('post/delete/{id}', 'PostController@destroy')->name('post.delete');
 
 
+    Route::get('contacts', 'ContactController@index')->name('contact.index');
+    Route::get('contact/getContactData', 'ContactController@getContactData')->name('contact.getContactData');
+    Route::post('contact/delete/{id}', 'ContactController@destroy')->name('contact.delete');
 
 
 

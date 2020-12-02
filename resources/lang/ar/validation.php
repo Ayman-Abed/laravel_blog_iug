@@ -156,6 +156,7 @@ return [
 
 
         'category_id'           => 'التصنيف',
+        'message'           => 'الرسالة',
         'tax_amount'           => 'قيمة الخصم',
         'stock'           => 'عدد العناصر',
         'paid_amount'           => 'المبلغ المدفوع',

@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Contact;
 use App\Post;
 use Illuminate\Http\Request;
+use Proengsoft\JsValidation\Facades\JsValidatorFacade as JsValidator;
+use Toastr;
 
 class UIController extends Controller
 {
@@ -13,8 +16,9 @@ class UIController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+
         $sliders = Post::where('slider', 1)->where('status', 1)->get();
         // For Menu
         $categories = Category::orderBy('created_at', 'desc')->take(6)->get();
@@ -22,6 +26,7 @@ class UIController extends Controller
         $posts = Post::where('status', 1)->orderBy('created_at', 'desc')->take(6)->get();
 
         $categories_posts = Category::orderBy('created_at', 'desc')->get();
+
         return view('UI.index')
             ->with('categories_posts', $categories_posts)
             ->with('first_post', $first_post)
@@ -57,6 +62,58 @@ class UIController extends Controller
 
         return view('UI.singlePost')
             ->with('latest_posts', $latest_posts)
+            ->with('post', $post)
+            ->with('categories', $categories);
+    }
+
+
+
+
+    public function showContact(Request $request)
+    {
+        // For Menu
+        $categories = Category::orderBy('created_at', 'desc')->take(6)->get();
+
+        // For Validate
+        $this->validationRules["first_name"] = 'required';
+        $this->validationRules["last_name"] = 'required';
+        $this->validationRules["email"] = 'required|email';
+        $this->validationRules["mobile"] = 'required|numeric';
+        $this->validationRules["message"] = 'required|max:255';
+
+        $validator = JsValidator::make($this->validationRules, $this->validationMessages);
+
+        return view('UI.contact')
+            ->with('validator', $validator)
+            ->with('categories', $categories);
+    }
+
+
+    public function contact(Request $request)
+    {
+
+        $request->validate($this->validationRules);
+
+        $data =  $request->all();
+
+        Contact::create($data);
+
+        Toastr::success("تم إرسال رسالة التواصل بنجاح");
+        return redirect()->back();
+    }
+
+
+
+
+
+
+    public function search(Request $request)
+    {
+        $search = $request->get('search', '');
+        $categories = Category::orderBy('created_at', 'desc')->take(6)->get();
+        $post = Post::where('title', 'like', '%' . $search . '%')->get();
+        return view('UI.search')
+            ->with('search', $search)
             ->with('post', $post)
             ->with('categories', $categories);
     }

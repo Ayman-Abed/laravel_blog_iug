@@ -46,6 +46,7 @@
         }
     </style>
 
+<link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 
 </head>
 
@@ -91,10 +92,10 @@
                         @endif
 
                     </div>
-                    <form action="#" class="search-form d-inline-block">
+                    <form method="GET" action="{{ route('UI.search') }}" class="search-form d-inline-block">
 
                         <div class="d-flex">
-                            <input type="email" class="form-control" placeholder="Search...">
+                            <input type="text" class="form-control" name="search" placeholder="Search...">
                             <button type="submit" class="btn btn-secondary"><span class="icon-search"></span></button>
                         </div>
                     </form>
@@ -107,6 +108,12 @@
             </div>
         </div>
 
+        <style>
+            .active_menu a{
+                color: #71af2a!important;
+                font-weight: bold;
+            }
+        </style>
 
         <div class="site-navbar py-2 js-sticky-header site-navbar-target d-none pl-0 d-lg-block" role="banner">
 
@@ -116,17 +123,19 @@
                     <div class="mr-auto">
                         <nav class="site-navigation position-relative text-right" role="navigation">
                             <ul class="site-menu main-menu js-clone-nav mr-auto d-none pl-0 d-lg-block">
-                                <li class="active">
+                                <li class="{{ Request::routeIs('UI.index') ? 'active_menu' : '' }}">
                                     <a href="{{ route('UI.index') }}" class="nav-link text-left">Home</a>
                                 </li>
                                 @foreach ($categories as $categoy)
-                                    <li>
+                                    <li class="{{ Request::routeIs('UI.showCategory',['id' => $categoy->id,'slug' =>  $categoy->slug]) ? 'active_menu' : ''}}">
                                         <a href="{{ route('UI.showCategory',['id' => $categoy->id,'slug' =>  $categoy->slug]) }}"
                                            class="nav-link text-left">{{ $categoy->name }}</a>
                                     </li>
                                 @endforeach
 
-                                <li><a href="contact.html" class="nav-link text-left">Contact</a></li>
+                                <li class="{{ Request::routeIs('UI.showContact') ? 'active_menu' : '' }}">
+                                    <a href="{{ route('UI.showContact') }}" class="nav-link text-left">Contact</a>
+                                </li>
                             </ul>
                         </nav>
 
@@ -154,7 +163,7 @@
                     <div class="copyright">
                         <p>
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            حقوق الطبع والنشر محفوظة لدى {{ $setting->blog_name }} &copy;
+                            The Copy Right Save For &copy; {{ $setting->blog_name }}
                             <script>document.write(new Date().getFullYear()); </script>
 
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
@@ -197,6 +206,8 @@
 
 
 <script src="{{ asset('UI/js/main.js') }}"></script>
+
+@stack('scripts')
 
 </body>
 

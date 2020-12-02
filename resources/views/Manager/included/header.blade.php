@@ -187,6 +187,9 @@
                                         class="kt-menu__link-icon flaticon-users-1">
                                     </i>
                                     <span class="kt-menu__link-text">المستخدمين</span>
+                                    <span class="kt-menu__link-badge">
+                                        <span class="kt-badge kt-badge--primary">{{ App\User::count() }}</span>
+                                    </span>
                                 </a>
                             </li>
 
@@ -196,6 +199,9 @@
                                         class="kt-menu__link-icon flaticon-squares">
                                     </i>
                                     <span class="kt-menu__link-text">التصنيفات</span>
+                                    <span class="kt-menu__link-badge">
+                                        <span class="kt-badge kt-badge--primary">{{ App\Category::count() }}</span>
+                                    </span>
                                 </a>
                             </li>
 
@@ -204,14 +210,33 @@
                                         class="kt-menu__link-icon fa fa-tag">
                                     </i>
                                     <span class="kt-menu__link-text">الوسوم</span>
+                                    <span class="kt-menu__link-badge">
+                                        <span class="kt-badge kt-badge--primary">{{ App\Tag::count() }}</span>
+                                    </span>
                                 </a>
                             </li>
 
                             <li class="kt-menu__item  {{ Request::routeIs('post.index') ? 'kt-menu__item--active' : ''}}" aria-haspopup="true">
-                                <a href="{{ route('post.index') }}" class="kt-menu__link "><i
+                                <a href="{{ route('post.index') }}" class="kt-menu__link ">
+                                    <i
                                         class="kt-menu__link-icon fa fa-file">
                                     </i>
                                     <span class="kt-menu__link-text">المنشورات</span>
+                                    <span class="kt-menu__link-badge">
+                                        <span class="kt-badge kt-badge--primary">{{ App\Post::count() }}</span>
+                                    </span>
+                                </a>
+
+                            </li>
+
+                            <li class="kt-menu__item  {{ Request::routeIs('contact.index') ? 'kt-menu__item--active' : ''}}" aria-haspopup="true">
+                                <a href="{{ route('contact.index') }}" class="kt-menu__link "><i
+                                        class="kt-menu__link-icon fa fa-comment-dots">
+                                    </i>
+                                    <span class="kt-menu__link-text">رسائل التواصل</span>
+                                    <span class="kt-menu__link-badge">
+                                        <span class="kt-badge kt-badge--primary">{{ App\Contact::count() }}</span>
+                                    </span>
                                 </a>
                             </li>
 

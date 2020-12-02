@@ -132,7 +132,10 @@
                     @if ($categories_post->posts->count() > 0)
                         <div class="col-lg-6">
                             <div class="section-title">
-                                <h2>{{ $categories_post->name }}</h2>
+                                <h2>
+                                    <a href="{{ route('UI.showCategory',['id' => $categories_post->id,'slug' =>  $categories_post->slug]) }}">
+                                         {{ $categories_post->name }}</h2>
+                                    </a>
                             </div>
                             @foreach ($categories_post->posts as $cat_post)
                                 <div class="post-entry-2 d-flex">

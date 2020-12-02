@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
+use App\Contact;
+use App\Post;
+use App\Tag;
+use App\User;
 use Illuminate\Http\Request;
 use Proengsoft\JsValidation\Facades\JsValidatorFacade as JsValidator;
 use Toastr;
@@ -15,7 +20,23 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('Manager.dashboard.index');
+        $posts = Post::all();
+        $categories = Category::all();
+        $tags = Tag::all();
+        $users = User::all();
+        $contacts = Contact::all();
+
+        // Latest Post
+        $latest_posts = Post::where('status', 1)->orderBy('created_at', 'desc')->take(6)->get();
+        $latest_contacts = Contact::orderBy('created_at', 'desc')->take(6)->get();
+        return view('Manager.dashboard.index')
+            ->with('posts', $posts)
+            ->with('categories', $categories)
+            ->with('tags', $tags)
+            ->with('users', $users)
+            ->with('contacts', $contacts)
+            ->with('latest_posts', $latest_posts)
+            ->with('latest_contacts', $latest_contacts);
     }
 
 
