@@ -12,6 +12,8 @@ class Post extends Model
     ];
     protected $appends = ['status_value', 'slider_value'];
 
+    protected $with = ['tags'];
+
 
     public function tags()
     {

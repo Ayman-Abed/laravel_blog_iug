@@ -10,7 +10,7 @@ class Category extends Model
     use SoftDeletes;
     protected $fillable = ['name', 'slug'];
 
-
+    protected $with = ['posts'];
     public function posts()
     {
         return $this->hasMany(Post::class);

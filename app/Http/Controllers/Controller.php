@@ -29,4 +29,32 @@ class Controller extends BaseController
         $file->move($destienation, $new_name);
         return  $directory . '/' . $new_name;
     }
+
+
+    // Hleper Function For Api
+    protected function sendResponse($result, $message = 'success', $code = 200)
+    {
+        $response = [
+            'success' => true,
+            'data'    => $result,
+            'message' => $message,
+            'status' => $code,
+        ];
+        return response()->json($response, 200);
+    }
+
+    protected function sendError($error, $code = 422, $errorMessages = [])
+    {
+        $response = [
+            'success' => false,
+            'message' => $error,
+            'status' => $code,
+        ];
+
+        if (!empty($errorMessages)) {
+            $response['data'] = $errorMessages;
+        }
+
+        return response()->json($response, $code);
+    }
 }

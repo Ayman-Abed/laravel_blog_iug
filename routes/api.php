@@ -17,6 +17,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+Route::post("register", "API\AuthController@register")->name('register');
+Route::post("login", "API\AuthController@login")->name('login');
 
+Route::group(['middleware' => 'auth:api'], function () {
 
-Route::get("test", "API\PoserController@index")->name('post.test');
+    Route::get("profile", "API\AuthController@profile")->name('profile');
+    Route::post("logout", "API\AuthController@logout")->name('logout');
+});
+
+Route::get("posts", "API\PostController@posts")->name('posts');
+Route::get("postsSlider", "API\PostController@postsSlider")->name('postsSlider');
+Route::get("categories", "API\CategoryController@categories")->name('categories');

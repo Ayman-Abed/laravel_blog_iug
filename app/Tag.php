@@ -11,7 +11,7 @@ class Tag extends Model
     protected $fillable = [
         'name'
     ];
-
+    protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
 
     protected $casts = [
         'created_at' => 'datetime:Y-m-d H:i:s',
