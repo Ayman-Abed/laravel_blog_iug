@@ -70,8 +70,7 @@
                                     <p>{!! Str::limit($first_post->content, 400) !!}</p>
                                     <div class="post-meta">
 
-                            <span class="date-read">{{ $first_post->created_at->toFormattedDateString() }}
-                                </span>
+                                        <span class="date-read">{{ $first_post->created_at->toFormattedDateString() }}</span>
                                     </div>
                                 </div>
                             </div>

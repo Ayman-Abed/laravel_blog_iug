@@ -216,6 +216,7 @@
                                                 <img src="{{ $latest_post->image }}" alt="">
                                             </div>
                                             <div class="kt-widget4__info">
+
                                                 <a  class="kt-widget4__username">
                                                     {{ $latest_post->title }}
                                                 </a>

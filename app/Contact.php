@@ -21,4 +21,11 @@ class Contact extends Model
     {
         return $this->first_name . ' ' . $this->last_name;
     }
+
+
+
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d H:i:s',
+        'updated_at' => 'datetime:Y-m-d H:i:s',
+    ];
 }
