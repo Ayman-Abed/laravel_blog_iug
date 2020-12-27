@@ -74,26 +74,27 @@
                                     </div>
                                 </div>
                             </div>
-                        @endif
 
 
-                        <div class="col-md-6">
-                            @foreach ($posts->where('id','!=',$first_post->id)->take(4) as $post)
+                            <div class="col-md-6">
+                                @foreach ($posts->where('id','!=',$first_post->id)->take(4) as $post)
 
-                                <div class="post-entry-2 d-flex bg-light">
-                                    <div class="thumbnail" style="background-image: url({{ $post->image }})"></div>
-                                    <div class="contents">
-                                        <h2>
-                                            <a href="{{ route('UI.showPost',['id' => $post->id,'slug' => $post->slug]) }}">{{ $post->title }}</a>
-                                        </h2>
-                                        <div class="post-meta">
-                                            <span
-                                                class="date-read">{{ $first_post->created_at->toFormattedDateString() }}</span>
+                                    <div class="post-entry-2 d-flex bg-light">
+                                        <div class="thumbnail" style="background-image: url({{ $post->image }})"></div>
+                                        <div class="contents">
+                                            <h2>
+                                                <a href="{{ route('UI.showPost',['id' => $post->id,'slug' => $post->slug]) }}">{{ $post->title }}</a>
+                                            </h2>
+                                            <div class="post-meta">
+                                                <span
+                                                    class="date-read">{{ $first_post->created_at->toFormattedDateString() }}</span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            @endforeach
-                        </div>
+                                @endforeach
+                            </div>
+                        @endif
+
                     </div>
                 </div>
 

@@ -15,9 +15,9 @@ class SettingTableSeed extends Seeder
         $data = [
             'logo' => "item/logo1.png",
             'miniLogo' => "item/logo1.png",
-            'blog_name' => 'مشروع جامعه',
-            'description' => 'مشروع جامعه',
-            'address' => 'مشروع جامعه',
+            'blog_name' => 'Laravel Blog IUG',
+            'description' => 'Laravel Blog IUG',
+            'address' => 'Laravel Blog IUG',
             'phone' => '123456789',
         ];
 
